@@ -1,0 +1,59 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+include:
+- path: ''
+  file_list:
+  - {path: app.h}
+package: Bluetooth
+configuration:
+- {name: SL_STACK_SIZE, value: '2752'}
+- {name: SL_HEAP_SIZE, value: '9700'}
+- {name: SL_BT_CONFIG_USER_ADVERTISERS, value: '4'}
+- {name: SL_BOARD_ENABLE_VCOM, value: '1'}
+- {name: SL_UARTDRV_USART_VCOM_FLOW_CONTROL_TYPE, value: uartdrvFlowControlHw}
+- condition: [psa_crypto]
+  name: SL_PSA_KEY_USER_SLOT_COUNT
+  value: '0'
+description: |
+  Bluetooth NCP (Network Co-Processor) target application with a minimal GATT  database, that makes it possible to access  the Bluetooth stack from a host controller via UART. It provides access to the host layer via BGAPI and not to the link layer via HCI.
+label: ncp_32CN
+readme:
+- {path: ../../../../../Applications/SimplicityStudio5.app/Contents/Eclipse/developer/sdks/gecko_sdk_suite/v3.1/app/bluetooth/documentation/example/ncp_empty/readme.html}
+source:
+- {path: main.c}
+- {path: app.c}
+- {path: app_properties.c}
+project_name: ncp_32CN
+quality: production
+component:
+- {id: bluetooth_feature_test}
+- instance: [vcom]
+  id: uartdrv_usart
+- {id: EFR32MG21A020F1024IM32}
+- {id: bt_fp_ncp_default}
+- {id: sl_system}
+- {id: mpu}
+- {id: ncp}
+- {id: device_init}
+- {id: bootloader_interface}
+- {id: brd4180b}
+- {id: rail_util_pti}
+other_file:
+- {path: create_bl_files.bat}
+- {path: create_bl_files.sh}
+- {path: readme_img0.png}
+- {path: readme_img1.png}
+- {path: readme_img2.png}
+- {path: readme_img3.png}
+- {path: readme_img4.png}
+- {path: readme_img5.png}
+- {path: readme_img6.png}
+define:
+- {name: SL_BT_API_FULL}
+tag: [prebuilt_demo, 'hardware:rf:band:2400']
+category: Bluetooth Examples
+toolchain_settings: []
+ui_hints:
+  highlight:
+  - {path: readme.html, focus: true}
+  - {path: config/btconf/gatt_configuration.btconf}
+
